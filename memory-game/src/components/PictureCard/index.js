@@ -20,7 +20,7 @@ class PictureCard extends Component {
   render() {
   return (
     <div className="card" style={{width: '18rem'}}>
-      <img src={this.props.image} className="card-img-top" alt={this.props.name} onClick={this.props.onClick}/>
+      <img src={this.props.image} className="card-img-top" alt="{this.props.name}" onClick={this.props.onClick}/>
     </div>
   );
 };
