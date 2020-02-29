@@ -1,12 +1,29 @@
-import React from "react";
+import React, {Component} from "react";
 import "./style.css";
 
-function PictureCard(props) {
+class PictureCard extends Component {
+  constructor(props) {
+    super(props);
+
+  this.state = {
+    clicked: false
+  };
+  this.handleClick = this.handleClick.bind(this);
+};
+  handleClick() {
+    console.log(this)
+    const newState = { ...this.state };
+    newState.clicked = true;
+    this.setState(newState)
+    console.log(this.state)
+  }
+  render() {
   return (
     <div className="card" style={{width: '18rem'}}>
-  <img src={props.image} className="card-img-top" alt={props.name}/>
-</div>
+      <img src={this.props.image} className="card-img-top" alt={this.props.name} onClick={this.props.onClick}/>
+    </div>
   );
+};
 };
 
 export default PictureCard;
