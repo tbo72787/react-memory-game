@@ -33,12 +33,35 @@ class Game extends Component {
     this.state = {
       images,
       clicked: [],
-      convertedImageArray
+      convertedImageArray,
+      score: 0,
+      topScore: 0
     };
   };
 
   handleImageClick(i)  {
-    console.log(i)
+    console.log(this)
+    console.log(this.state.clicked)
+    if (!this.state.clicked.includes(i)) {
+      return (
+        this.setState(prevState => ({
+          clicked: [...prevState.clicked, i]
+        })),
+        this.setState({score: this.state.score + 1}),
+        console.log("if" + this.state.clicked),
+        console.log("if" + this.state.score)
+  
+      )
+    } 
+    else {
+      return this.setState({score: 0}),
+      this.setState({clicked: []}),
+      console.log("else" + this.state.clicked),
+      console.log("else" + this.state.score)
+  
+    }
+    console.log(this.state.clicked)
+    console.log(this.state.score)
   }
   render() {
     return (
