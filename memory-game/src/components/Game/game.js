@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import PictureCard from "./PictureCard/pictureCard"
+import PictureCard from "./PictureCard/pictureCard";
+import Nav from "./Nav/nav"
 import '../../App.css';
 
 const convertedImageArray = [];
@@ -35,7 +36,8 @@ class Game extends Component {
       clicked: [],
       convertedImageArray,
       score: 0,
-      topScore: 0
+      topScore: 0,
+      correct:"Click an image to begin!"
     };
   };
 
@@ -48,17 +50,24 @@ class Game extends Component {
           clicked: [...prevState.clicked, i]
         })),
         this.setState({score: this.state.score + 1}),
-        console.log("if" + this.state.clicked),
-        console.log("if" + this.state.score)
+        this.setState({correct: "You guessed correctly!"}),
+        console.log("ifstate" + this.state.clicked),
+        console.log("ifscore" + this.state.score)
   
       )
     } 
     else {
-      return this.setState({score: 0}),
-      this.setState({clicked: []}),
-      console.log("else" + this.state.clicked),
-      console.log("else" + this.state.score)
-  
+      console.log("elsestatebefore" + this.state.clicked)
+      if (this.state.topScore < this.state.score) {
+        this.setState({topScore: this.state.score})
+      };
+      return (
+        this.setState({score: 0}),
+        this.setState({clicked: []}),
+        this.setState({correct: "You guessed incorrectly!"}),
+        console.log("elsestate" + this.state.clicked),
+        console.log("elsescore" + this.state.score)
+      )
     }
     console.log(this.state.clicked)
     console.log(this.state.score)
@@ -66,6 +75,11 @@ class Game extends Component {
   render() {
     return (
       <div>
+        <Nav
+          score={this.state.score}
+          topScore={this.state.topScore}
+          correct={this.state.correct}
+        />
         {this.state.convertedImageArray.map((image, i) => (
           <PictureCard
             key={i}
